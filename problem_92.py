@@ -46,3 +46,6 @@ for n in range(1, RANGE):
 
 
 print(total)
+
+
+# Make fast
