@@ -2,6 +2,7 @@ RANGE = 1_000_000
 CHAIN_LENGTH = 60
 factorial_cache = {0: 1}
 digit_factorial_sum_cache = {}
+chain_cache = {}
 
 
 def factorial(n: int) -> int:
@@ -43,13 +44,16 @@ def digit_factorial_sum(n: int) -> int:
 
 
 def factorial_chain(n: int, chain: set = None) -> int:
+    if n in chain_cache:
+        return chain_cache[n]
     if not chain:
         chain = set()
     if n in chain:
         return 0
     chain.add(n)
     new_n = digit_factorial_sum(n)
-    return 1 + factorial_chain(new_n, chain)
+    chain_cache[n] = 1 + factorial_chain(new_n, chain)
+    return chain_cache[n]
 
 
 total = 0
